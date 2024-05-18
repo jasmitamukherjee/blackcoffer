@@ -9,6 +9,12 @@ import clientRoutes from './routes/client.js'
 import generalRoutes from './routes/general.js'
 
 
+//data
+import Data from './models/Data.js'
+import { dataset } from './data/index.js';
+
+
+
 dotenv.config();
 const app = express();
 app.use(express.json())
@@ -32,5 +38,6 @@ mongoose.connect(process.env.MONGO_URL, {
   
 
 }).then(()=>{
-    app.listen(PORT, ()=> console.log(`Server Port: ${PORT}`))
+    app.listen(PORT, ()=> console.log(`Server Port: ${PORT}`));
+    // Data.insertMany(dataset);
 }).catch((error) => console.log(`${error} did not connect`))

@@ -28,7 +28,10 @@ import {
   AdminPanelSettingsOutlined,
   TrendingUpOutlined,
   PieChartOutlined,
+  
 } from "@mui/icons-material";
+import InsightsIcon from '@mui/icons-material/Insights';
+import TopicIcon from '@mui/icons-material/Topic';
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from './FlexBetween';
@@ -40,21 +43,14 @@ const navItems = [
     text: "Dashboard",
     icon: <HomeOutlined />,
   },
-  {
-    text: "Client Facing",
-    icon: null,
-  },
-  {
-    text: "Products",
-    icon: <ShoppingCartOutlined />,
-  },
+  
   
   {
-    text: "Geography",
+    text: "Location",
     icon: <PublicOutlined />,
   },
   {
-    text: "Sales",
+    text: "Publications",
     icon: null,
   },
   {
@@ -62,18 +58,18 @@ const navItems = [
     icon: <PointOfSaleOutlined />,
   },
   {
-    text: "Daily",
+    text: "Date",
     icon: <TodayOutlined />,
   },
   {
-    text: "Monthly",
-    icon: <CalendarMonthOutlined />,
+    text: "Insights",
+    icon: <InsightsIcon />,
   },
-  
   {
-    text: "Admin",
-    icon: <AdminPanelSettingsOutlined />,
+    text: "Topics",
+    icon: <TopicIcon />,
   },
+ 
   
 ];
 
