@@ -83,3 +83,22 @@ export const getIntensityAndLikelihood = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 };
+
+
+export const getYear = async (req, res) => {
+    try {
+      const data = await Data.find({}, 'start_year end_year');
+  
+      if (!data || data.length === 0) {
+        return res.status(404).json({ message: "Data not found" });
+      }
+  
+      const start_year = data.map(item => item.start_year);
+      const end_year = data.map(item => item.end_year);
+  
+      res.status(200).json({ start_year, end_year });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+  

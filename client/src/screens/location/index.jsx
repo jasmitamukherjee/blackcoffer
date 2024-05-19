@@ -116,7 +116,6 @@ const Location = () => {
       <Header title="LOCATION" subtitle="Find from where the publications are made." />
       <div>
         <svg ref={svgRef} width="1000" height="600" style={{  }} />
-        {/* <svg ref={legendRef} width="60" height="220" style={{ marginLeft: '20px' }} /> */}
       </div>
     </Box>
   );

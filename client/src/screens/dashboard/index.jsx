@@ -10,12 +10,16 @@ import ShowChartIcon from '@mui/icons-material/ShowChart';
 import MoreTimeIcon from '@mui/icons-material/MoreTime';
 import useFetchRelevance from '../../state/useFetchRelevence';
 import BarChart from '../../components/BarChart';
-
+import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
+import useFetchYear from '../../state/useFetchYear';
+import TimeSeries from '../../components/TimeSeries';
+import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 const Dashboard = () => {
   const theme = useTheme();
   const { intensity } = useFetchIntensity();
   const { likelihood } = useFetchLikelihood();
   const { relevance } = useFetchRelevance();
+  const {startYear,endYear} = useFetchYear();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
 
   return (
@@ -63,8 +67,16 @@ const Dashboard = () => {
         <BarChart
           title="Relevance"
           description="Relevance of the event."
-          icon={<MoreTimeIcon sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
+          icon={<AirlineStopsIcon sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
           value={relevance}
+        />
+          <TimeSeries
+          title="Years"
+          description="Time Series Data: No Of Pubcations made in respective years."
+          icon={<DonutLargeIcon sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
+
+          startYear={startYear}
+          endYear={endYear}
         />
       </Box>
     </Box>

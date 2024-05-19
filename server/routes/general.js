@@ -1,5 +1,5 @@
 import express from 'express';
-import {getData,getIntensity,getLocation,getOverview,getIntensityAndLikelihood, getLikelihood, getRelevence} from '../controllers/general.js'
+import {getData,getIntensity,getLocation,getOverview,getIntensityAndLikelihood, getLikelihood, getRelevence,getYear} from '../controllers/general.js'
 
 const router=express.Router();
 router.get("/data/:id",getData)
@@ -9,7 +9,7 @@ router.get("/intensity",getIntensity)
 router.get("/likelihood",getLikelihood)
 router.get("/relevance",getRelevence)
 
-
+router.get("/year",getYear)
 router.get("/intensityandlikelihood/:id",getIntensityAndLikelihood)
 
 
