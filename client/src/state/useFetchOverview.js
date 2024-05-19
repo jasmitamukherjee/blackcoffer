@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react';
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 // console.log('Base URL:', BASE_URL);
 
-const useFetchData = (id) => {
-  const [data, setData] = useState(null);
+const useFetchOverview = (id) => {
+  const [overview, setOverview] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -13,25 +13,23 @@ const useFetchData = (id) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`http://localhost:5001/general/data/${id}`);
+        const response = await fetch("http://localhost:5001/general/overview");
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const result = await response.json();
-        setData(result);
+        setOverview(result);
       } catch (error) {
         setError(error);
       } finally {
         setLoading(false);
       }
     };
+fetchData();
+   
+  }, []);
 
-    if (id) {
-      fetchData();
-    }
-  }, [id]);
-
-  return { data, error, loading };
+  return { overview, error, loading };
 };
 
-export default useFetchData;
+export default useFetchOverview;

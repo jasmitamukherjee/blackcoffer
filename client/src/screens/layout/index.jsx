@@ -13,7 +13,7 @@ const Layout = () => {
   const dataId = useSelector((state)=>state.global.dataId);
   // console.log("dataid",dataId);
 const { data } = useFetchData(dataId);
-// console.log("data from layout index",data);
+
 
   return (
     <Box display={isNonMobile ? "flex":"block"} width = "100%" height= "100%">

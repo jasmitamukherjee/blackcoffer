@@ -38,7 +38,8 @@ const handleClose = ()=> setAnchorEl(null)
    <AppBar sx={{
     position: "static",
     background: "none",
-    boxShadow: "none"
+    boxShadow: "none",
+    position:"relative"
    }}>
     <Toolbar sx={{
       justifyContent:"space-between"

@@ -26,6 +26,7 @@ import TopicIcon from '@mui/icons-material/Topic';
 import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from './FlexBetween';
 import profileImage from '../assets/profile.png';
+import WorldMap from './WorldMap';
 
 const navItems = [
   {
@@ -164,6 +165,8 @@ const Sidebar = ({
               <SettingsOutlined sx={{ color: theme.palette.secondary[300], fontSize: "25px" }} />
             </FlexBetween>
           </Box>
+         
+          
         </Drawer>
       )}
     </Box>
