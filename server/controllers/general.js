@@ -29,3 +29,14 @@ export const getOverview = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 };
+
+
+export const getIntensity = async (req, res) => {
+    try {
+        const data = await Data.find({}, 'intensity');
+        const intensity = data.map(entry => entry.intensity);
+        res.status(200).json(intensity);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
