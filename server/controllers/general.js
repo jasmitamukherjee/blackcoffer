@@ -41,6 +41,29 @@ export const getIntensity = async (req, res) => {
     }
 };
 
+export const getLikelihood= async (req, res) => {
+    try {
+        const data = await Data.find({}, 'likelihood');
+        const likelihood = data.map(entry => entry.likelihood);
+        res.status(200).json(likelihood);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
+
+
+export const getRelevence= async (req, res) => {
+    try {
+        const data = await Data.find({}, 'relevance');
+        const relevance = data.map(entry => entry.relevance);
+        res.status(200).json(relevance);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
+
 
 export const getIntensityAndLikelihood = async (req, res) => {
     try {
