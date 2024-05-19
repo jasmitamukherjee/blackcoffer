@@ -1,7 +1,7 @@
 import { Box, Button,  useTheme,  useMediaQuery,
 
 } from '@mui/material'
-import IntensityChart from '../../components/IntensityChart'
+import LineChart from '../../components/IntensityChart'
 import React from 'react'
 import FlexBetween from '../../components/FlexBetween'
 import Header from '../../components/Header'
@@ -12,8 +12,11 @@ import {
   Traffic,
 } from "@mui/icons-material";
 import { DownloadOutlined } from '@mui/icons-material'
+import useFetchIntensity from '../../state/useFetchIntensity'
 const Dashboard = () => {
   const theme = useTheme();
+  const { intensity } = useFetchIntensity();
+
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
   return (
     <Box m="1.5rem 2.5rem">
@@ -46,7 +49,7 @@ const Dashboard = () => {
           "& > div": { gridColumn: isNonMediumScreens ? undefined : "span 12" },
         }}
       >
-        <IntensityChart
+        <LineChart
         title="Intensity"
         
         description="Intensity for the event to occur"
@@ -55,6 +58,7 @@ const Dashboard = () => {
             sx={{ color: theme.palette.secondary[300], fontSize: "26px" }}
         
             />}
+            value = {intensity}
             />
       </Box>
 

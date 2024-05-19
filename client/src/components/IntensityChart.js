@@ -4,9 +4,8 @@ import * as d3 from 'd3';
 import FlexBetween from './FlexBetween';
 import { Box, Typography, useTheme } from '@mui/material';
 
-const IntensityChart = ({ title, description, icon }) => {
+const LineChart = ({ title, description, icon, value }) => {
   const theme = useTheme();
-  const { intensity } = useFetchIntensity();
   const svgRef = useRef(null);
   const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
 
@@ -16,51 +15,58 @@ const IntensityChart = ({ title, description, icon }) => {
       const svgHeight = svgRef.current.clientHeight;
       setSvgDimensions({ width: svgWidth, height: svgHeight });
     }
-  }, [svgRef]);
+  }, [svgRef, value]);
 
   useEffect(() => {
-    if (intensity && svgDimensions.width && svgDimensions.height) {
+    if (value && svgDimensions.width && svgDimensions.height) {
       const svg = d3.select(svgRef.current);
 
       const margin = { top: 20, right: 30, bottom: 30, left: 40 };
       const width = svgDimensions.width - margin.left - margin.right;
       const height = svgDimensions.height - margin.top - margin.bottom;
 
-      const xScale = d3.scaleBand()
-        .domain(d3.range(intensity.length))
-        .range([margin.left, width + margin.left])
-        .padding(0.1);
+      const xScale = d3.scaleLinear()
+        .domain([0, 600]) // Limit x-axis till 600
+        .range([margin.left, width + margin.left]);
 
       const yScale = d3.scaleLinear()
-        .domain([0, d3.max(intensity)])
+        .domain([0, d3.max(value)])
         .range([height, margin.top]);
 
-      svg.selectAll('rect')
-        .data(intensity)
-        .enter()
-        .append('rect')
-        .attr('x', (d, i) => xScale(i))
-        .attr('y', d => yScale(d))
-        .attr('width', xScale.bandwidth())
-        .attr('height', d => height - yScale(d))
-        .attr('fill', 'steelblue');
+      svg.selectAll('path').remove(); // Remove any existing line paths
+
+      const line = d3.line()
+        .x((d, i) => xScale(i))
+        .y(d => yScale(d));
+
+      svg.append('path')
+        .datum(value)
+        .attr('fill', 'none')
+        .attr('stroke', 'steelblue')
+        .attr('stroke-width', 1.5)
+        .attr('d', line);
 
       const xAxis = d3.axisBottom(xScale);
       const yAxis = d3.axisLeft(yScale);
 
+      svg.select('.x-axis').remove(); // Remove any existing x-axis
+      svg.select('.y-axis').remove(); // Remove any existing y-axis
+
       svg.append('g')
+        .attr('class', 'x-axis')
         .attr('transform', `translate(0,${height})`)
         .call(xAxis);
 
       svg.append('g')
+        .attr('class', 'y-axis')
         .attr('transform', `translate(${margin.left},0)`)
         .call(yAxis);
     }
-  }, [intensity, svgDimensions]);
+  }, [value, svgDimensions]);
 
   return (
     <Box
-      gridColumn="auto"
+      gridColumn="span 6"
       gridRow="span 3"
       display="flex"
       flexDirection="column"
@@ -84,4 +90,6 @@ const IntensityChart = ({ title, description, icon }) => {
   );
 };
 
-export default IntensityChart;
+export default LineChart;
+
+

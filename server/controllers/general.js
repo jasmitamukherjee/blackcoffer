@@ -40,3 +40,23 @@ export const getIntensity = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 };
+
+
+export const getIntensityAndLikelihood = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const data = await Data.findById(id);
+        
+        if (!data) {
+            return res.status(404).json({ message: "Data not found" });
+        }
+
+        const intensity = data.intensity;
+        const likelihood = data.likelihood;
+        
+        res.status(200).json({ intensity, likelihood });
+        
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
