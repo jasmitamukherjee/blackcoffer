@@ -1,6 +1,6 @@
 import { Box, Button, useTheme, useMediaQuery } from '@mui/material';
 import LineChart from '../../components/IntensityChart';
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import FlexBetween from '../../components/FlexBetween';
 import Header from '../../components/Header';
 import { DownloadOutlined } from '@mui/icons-material';
@@ -17,7 +17,9 @@ import DonutLargeIcon from '@mui/icons-material/DonutLarge';
 import useFetchRegion from '../../state/useFetchRegion';
 import PieChart from '../../components/PieChart';
 import { Pie, PieCanvas } from '@nivo/pie';
-import useFetchTopic from '../../state/useFetchTopic';
+import useFetchTopicList from '../../state/useFetchTopicList';
+import useFetchTopicData from '../../state/useFetchTopicData';
+
 const Dashboard = () => {
   const theme = useTheme();
   const { intensity } = useFetchIntensity();
@@ -25,8 +27,9 @@ const Dashboard = () => {
   const { relevance } = useFetchRelevance();
   const {startYear,endYear} = useFetchYear();
   const {region} = useFetchRegion()
-  const {data} =useFetchTopic()
-  // console.log("data from dash",data)
+  const { topic } = useFetchTopicList();
+ 
+
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
 
   return (
@@ -77,11 +80,10 @@ const Dashboard = () => {
           icon={<AirlineStopsIcon sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
           value={relevance}
         />
-          <TimeSeries
+        <TimeSeries
           title="Years"
           description="Time Series Data: No Of Pubcations made in respective years."
           icon={<DonutLargeIcon sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
-
           startYear={startYear}
           endYear={endYear}
         />
@@ -89,8 +91,7 @@ const Dashboard = () => {
           title="Region"
           description="Regions from where the the publications are made."
           icon={<DonutLargeIcon sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
-
-         value={region}
+          value={region}
         />
       </Box>
     </Box>

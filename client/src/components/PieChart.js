@@ -103,7 +103,7 @@ const PieChart = ({ title, description, icon, value }) => {
 
   return (
     <Box
-      gridColumn="span 2"
+      gridColumn="span 6"
       gridRow="span 3"
       display="flex"
       flexDirection="column"
@@ -122,7 +122,7 @@ const PieChart = ({ title, description, icon, value }) => {
       <FlexBetween gap="1rem">
         <Typography>{description}</Typography>
       </FlexBetween>
-      <svg ref={svgRef} style={{ width: '100%', height: '100%' }} />
+      <svg ref={svgRef} style={{ width: '100%', height: '100%',}} />
     </Box>
   );
 };

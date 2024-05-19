@@ -112,7 +112,7 @@ const Location = () => {
   }, [countries, theme]);
 
   return (
-    <Box m="1.5rem 2.5rem">
+    <Box m="0px 2.5rem">
       <Header title="LOCATION" subtitle="Find from where the publications are made." />
       <div>
         <svg ref={svgRef} width="1000" height="600" style={{  }} />

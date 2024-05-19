@@ -124,3 +124,15 @@ export const getYear = async (req, res) => {
     
     res.json({ topic, frequency, relevance });
 };
+
+
+
+export const getTopic= async (req, res) => {
+    try {
+        const data = await Data.find({}, 'topic');
+        const topic = data.map(entry => entry.topic);
+        res.status(200).json(topic);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
