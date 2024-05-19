@@ -14,12 +14,19 @@ import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
 import useFetchYear from '../../state/useFetchYear';
 import TimeSeries from '../../components/TimeSeries';
 import DonutLargeIcon from '@mui/icons-material/DonutLarge';
+import useFetchRegion from '../../state/useFetchRegion';
+import PieChart from '../../components/PieChart';
+import { Pie, PieCanvas } from '@nivo/pie';
+import useFetchTopic from '../../state/useFetchTopic';
 const Dashboard = () => {
   const theme = useTheme();
   const { intensity } = useFetchIntensity();
   const { likelihood } = useFetchLikelihood();
   const { relevance } = useFetchRelevance();
   const {startYear,endYear} = useFetchYear();
+  const {region} = useFetchRegion()
+  const {data} =useFetchTopic()
+  // console.log("data from dash",data)
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
 
   return (
@@ -77,6 +84,13 @@ const Dashboard = () => {
 
           startYear={startYear}
           endYear={endYear}
+        />
+         <PieChart
+          title="Region"
+          description="Regions from where the the publications are made."
+          icon={<DonutLargeIcon sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
+
+         value={region}
         />
       </Box>
     </Box>

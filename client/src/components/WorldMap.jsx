@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import * as topojson from 'topojson';
+import { feature } from 'topojson';
+
 const WorldMap = () => {
   const svgRef = useRef();
 

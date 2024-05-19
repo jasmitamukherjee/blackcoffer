@@ -21,6 +21,15 @@ export const getLocation = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 };
+export const getRegion = async (req, res) => {
+    try {
+        const data = await Data.find({}, 'region');
+        const region = data.map(entry => entry.region);
+        res.status(200).json(region);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
 export const getOverview = async (req, res) => {
     try {
         const data = await Data.find();
@@ -102,3 +111,16 @@ export const getYear = async (req, res) => {
     }
   };
   
+// Define route for frequency and relevance endpoint
+ export const  getTopicData=async (req, res) => {
+    const { topic } = req.params;
+    // Filter the dataset to get entries with the specified topic
+    const topicEntries = await Data.find({ topic });
+    
+    // Calculate frequency and relevance
+    const frequency = topicEntries.length;
+    const totalRelevance = topicEntries.reduce((acc, curr) => acc + curr.relevance, 0);
+    const relevance = frequency === 0 ? 0 : totalRelevance / frequency;
+    
+    res.json({ topic, frequency, relevance });
+};
