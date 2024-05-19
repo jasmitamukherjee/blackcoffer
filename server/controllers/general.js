@@ -6,8 +6,12 @@ export const getData= async(req,res)=>{
         const {id} = req.params;
         const data= await Data.findById(id);
         res.status(200).json(data);
+        console.log("data",data)
 
-    }catch(error){
-res.status(404).json({message : error.message})
+    }
+    catch(error){
+res.status(404).json({message : error.message}
+)
+console.log("error happened")
     }
 }
