@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 const useFetchTopicData = (topic) => {
   const [frequency, setFrequency] = useState(null);
-  const [relevance, setRelevance] = useState(null);
+  const [topicrelevance, setRelevance] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -28,7 +28,7 @@ const useFetchTopicData = (topic) => {
     fetchTopicData();
   }, [topic]);
 
-  return { frequency, relevance, error, loading };
+  return { frequency, topicrelevance, error, loading };
 };
 
 export default useFetchTopicData;

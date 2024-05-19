@@ -46,16 +46,8 @@ const navItems = [
     icon: <PointOfSaleOutlined />,
   },
   {
-    text: "Date",
-    icon: <TodayOutlined />,
-  },
-  {
     text: "Insights",
     icon: <InsightsIcon />,
-  },
-  {
-    text: "Topics",
-    icon: <TopicIcon />,
   },
 ];
 

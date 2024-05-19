@@ -28,7 +28,7 @@ const Dashboard = () => {
   const {startYear,endYear} = useFetchYear();
   const {region} = useFetchRegion()
   const { topic } = useFetchTopicList();
- 
+  console.log(topic)
 
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
 
