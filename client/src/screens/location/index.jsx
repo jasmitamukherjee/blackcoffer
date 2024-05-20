@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { feature } from 'topojson-client';
 import useFetchLocation from 'state/useFetchLocation'; // Adjust the import based on your directory structure
@@ -11,9 +11,17 @@ const Location = () => {
   const legendRef = useRef(null);
   const theme = useTheme();
   const { location: countries } = useFetchLocation();
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    if (countries && svgRef.current) {
+    const svg = d3.select(svgRef.current);
+    const width = svg.node().getBoundingClientRect().width;
+    const height = svg.node().getBoundingClientRect().height;
+    setDimensions({ width, height });
+  }, []);
+
+  useEffect(() => {
+    if (countries && dimensions.width && dimensions.height) {
       fetch('https://unpkg.com/world-atlas/countries-50m.json')
         .then((response) => response.json())
         .then((data) => {
@@ -30,7 +38,9 @@ const Location = () => {
 
           const svg = d3.select(svgRef.current);
 
-          const projection = d3.geoNaturalEarth1().scale(220).translate([500, 250]);
+          const projection = d3.geoNaturalEarth1()
+            .fitSize([dimensions.width, dimensions.height], { type: "Sphere" })
+            .translate([dimensions.width / 2, dimensions.height / 2]);
           const pathGenerator = d3.geoPath().projection(projection);
 
           // Add gradient legend
@@ -109,13 +119,13 @@ const Location = () => {
             });
         });
     }
-  }, [countries, theme]);
+  }, [countries, theme, dimensions]);
 
   return (
     <Box m="0px 2.5rem">
       <Header title="LOCATION" subtitle="Find from where the publications are made." />
-      <div>
-        <svg ref={svgRef} width="1000" height="600" style={{  }} />
+      <div style={{ width: '100%', height: '75vh' }}>
+        <svg ref={svgRef} width="100%" height="100%" style={{ overflow: 'visible' }} />
       </div>
     </Box>
   );
