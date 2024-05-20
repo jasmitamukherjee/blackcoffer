@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 const useFetchTopicList = () => {
-  const [topic, setTopicList] = useState(null);
+  const [topics, setTopicList] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -26,7 +26,7 @@ const useFetchTopicList = () => {
     fetchTopicList();
   }, []);
 
-  return { topic, error, loading };
+  return { topics, error, loading };
 };
 
 export default useFetchTopicList;

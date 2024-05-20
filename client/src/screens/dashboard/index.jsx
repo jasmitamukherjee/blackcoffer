@@ -27,9 +27,10 @@ const Dashboard = () => {
   const { relevance } = useFetchRelevance();
   const {startYear,endYear} = useFetchYear();
   const {region} = useFetchRegion()
-  const { topic } = useFetchTopicList();
-  console.log(topic)
-
+  const { topics } = useFetchTopicList();
+  // console.log(topics)
+  const { topicData } = useFetchTopicData(topics);
+// console.log("topicdata from dash",topicData)
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
 
   return (

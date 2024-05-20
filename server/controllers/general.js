@@ -127,12 +127,22 @@ export const getYear = async (req, res) => {
 
 
 
-export const getTopic= async (req, res) => {
+// export const getTopic= async (req, res) => {
+//     try {
+//         const data = await Data.find({}, 'topic');
+//         const topic = data.map(entry => entry.topic);
+//         res.status(200).json(topic);
+//     } catch (error) {
+//         res.status(404).json({ message: error.message });
+//     }
+// };
+export const getTopic = async (req, res) => {
     try {
-        const data = await Data.find({}, 'topic');
-        const topic = data.map(entry => entry.topic);
-        res.status(200).json(topic);
+      const data = await Data.find({}, 'topic');
+      const topic = [...new Set(data.map(entry => entry.topic))];
+      res.status(200).json(topic);
     } catch (error) {
-        res.status(404).json({ message: error.message });
+      res.status(404).json({ message: error.message });
     }
-};
+  };
+  
