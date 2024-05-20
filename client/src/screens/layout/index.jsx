@@ -26,6 +26,8 @@ const { data } = useFetchData(dataId);
 
 isSidebarOpen={isSidebarOpen} 
 setIsSidebarOpen={setIsSidebarOpen}
+
+
 />
         <Outlet/>
       </Box>

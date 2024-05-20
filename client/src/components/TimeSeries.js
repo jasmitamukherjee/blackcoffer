@@ -7,21 +7,16 @@ const TimeSeries = ({ title, startYear, endYear, icon, description }) => {
   const theme = useTheme();
   const svgRef = useRef();
   const [data, setData] = useState([]);
-  const width = 800; // Define width
-  const height = 400; // Define height
 
   useEffect(() => {
     if (startYear && endYear) {
-      // Combine start and end years
       const allYears = [...startYear, ...endYear];
-      // Count the occurrences of each year
       const yearCounts = allYears.reduce((acc, curr) => {
         acc[curr] = (acc[curr] || 0) + 1;
         return acc;
       }, {});
-      // Convert the counts to an array of objects
       const combinedData = Object.entries(yearCounts).map(([year, count]) => ({
-        year: new Date(year), // Assuming years are in YYYY format
+        year: new Date(year),
         value: count,
       }));
       setData(combinedData);
@@ -32,15 +27,17 @@ const TimeSeries = ({ title, startYear, endYear, icon, description }) => {
     if (data.length > 0) {
       const svg = d3.select(svgRef.current);
       const margin = { top: 20, right: 20, bottom: 50, left: 50 };
+      const width = svgRef.current.clientWidth; // Get the container width
+      const height = svgRef.current.clientHeight; // Get the container height
 
-      svg.selectAll('*').remove(); // Clear existing content
+      svg.selectAll('*').remove();
 
       const x = d3.scaleTime()
-        .domain([new Date('2015'), new Date('2060')]) // Set x-axis domain from 2000 to 2040
+        .domain([new Date('2015'), new Date('2060')])
         .range([margin.left, width - margin.right]);
 
       const y = d3.scaleLinear()
-        .domain([0, 210]) // Set y-axis domain from 0 to 210
+        .domain([0, 210])
         .nice()
         .range([height - margin.bottom, margin.top]);
 
