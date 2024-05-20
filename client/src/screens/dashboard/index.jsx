@@ -19,7 +19,7 @@ import PieChart from '../../components/PieChart';
 import { Pie, PieCanvas } from '@nivo/pie';
 import useFetchTopicList from '../../state/useFetchTopicList';
 import useFetchTopicData from '../../state/useFetchTopicData';
-
+import ScatterPlot from 'components/ScatterPlot';
 const Dashboard = () => {
   const theme = useTheme();
   const { intensity } = useFetchIntensity();
@@ -75,12 +75,7 @@ const Dashboard = () => {
           icon={<MoreTimeIcon sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
           value={likelihood}
         />
-        <BarChart
-          title="Relevance"
-          description="Relevance of the event."
-          icon={<AirlineStopsIcon sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
-          value={relevance}
-        />
+        
         <TimeSeries
           title="Years"
           description="Time Series Data: No Of Pubcations made in respective years."
@@ -94,9 +89,18 @@ const Dashboard = () => {
           icon={<DonutLargeIcon sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
           value={region}
         />
+        <ScatterPlot
+            title="Topic Data"
+            description="Relevance vs Frequency of Topics"
+            icon={<DonutLargeIcon sx={{ color: theme.palette.secondary[300], fontSize: "26px" }} />}
+
+            data={topicData}
+          />
       </Box>
     </Box>
   );
 };
 
 export default Dashboard;
+
+

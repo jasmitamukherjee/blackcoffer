@@ -13,6 +13,7 @@ import Layout from "./screens/layout";
 import Dashboard from "./screens/dashboard";
 import Location from "screens/location";
 import Overview from "./screens/overview";
+import Insights from "./screens/insights";
 function App() {
   const mode = useSelector((state) => state.global.mode);
   const theme = useMemo(()=> createTheme(themeSettings(mode)),[mode])
@@ -27,8 +28,9 @@ function App() {
         <Route path='/' element={<Navigate to ='/dashboard' replace/>}/>
         <Route path ='/dashboard' element={<Dashboard/>}/>
         <Route path ='/location' element={<Location/>}/>
-        <Route exact path ='/overview' element={<Overview/>}/>
+        <Route path ='/overview' element={<Overview/>}/>
 
+        <Route path ='/insights' element={<Insights/>}/>
 
         </Route>
         </Routes>
