@@ -14,7 +14,7 @@ const useFetchTopicData = (topics) => {
       try {
         const data = await Promise.all(
           topics.map(async (topic) => {
-            const response = await fetch(`http://localhost:5001/general/topic/${topic}`);
+            const response = await fetch(`https://blackcoffer-backend-gf2t.onrender.com/general/topic/${topic}`);
             if (!response.ok) {
               throw new Error(`Failed to fetch data for topic: ${topic}`);
             }

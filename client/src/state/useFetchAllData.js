@@ -10,7 +10,7 @@ const useFetchAllData = () => {
           const fetchData = async () => {
             setLoading(true);
             try {
-              const response = await fetch("http://localhost:5001/general/data");
+              const response = await fetch("https://blackcoffer-backend-gf2t.onrender.com/general/data");
               if (!response.ok) {
                 throw new Error('Network response was not ok');
               }
