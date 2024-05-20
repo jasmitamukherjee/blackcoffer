@@ -1,5 +1,5 @@
 import express from 'express';
-import {getData,getIntensity,getLocation,getOverview,getIntensityAndLikelihood, getLikelihood, getRelevence,getYear, getRegion, getTopicData, getTopic,getSource,getPestle} from '../controllers/general.js'
+import {getData,getIntensity,getLocation,getOverview,getIntensityAndLikelihood, getLikelihood, getRelevence,getYear, getRegion, getTopicData, getTopic,getSource,getPestle, getAllData} from '../controllers/general.js'
 
 const router=express.Router();
 router.get("/data/:id",getData)
@@ -15,7 +15,7 @@ router.get("/source",getSource)
 router.get("/pestle",getPestle)
 router.get("/year",getYear)
 
-
+router.get("/data",getAllData)
 // router.get('/dashboard',getDashboardStats)
 export default router;
 

@@ -10,9 +10,10 @@ import PieChart from '../../components/PieChart';
 import useFetchSource from 'state/useFetchSource';
 import useFetchPestle from 'state/useFetchPestle';
 import BarGraph from 'components/BarGraph';
+import useFetchAllData from 'state/useFetchAllData';
 const Insights = () => {
   const theme = useTheme();
-  
+  const {data} = useFetchAllData();
   const {source} = useFetchSource();
   const {pestle}= useFetchPestle();
   const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
@@ -21,18 +22,7 @@ const Insights = () => {
       <FlexBetween>
         <Header title="Insights" subtitle="Welcome to your Insights" />
         <Box>
-          <Button
-            sx={{
-              backgroundColor: theme.palette.secondary.light,
-              color: theme.palette.background.alt,
-              fontSize: "14px",
-              fontWeight: "bold",
-              padding: "10px 20px",
-            }}
-          >
-            <DownloadOutlined sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
+         
         </Box>
       </FlexBetween>
 
