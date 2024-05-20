@@ -73,6 +73,37 @@ export const getRelevence= async (req, res) => {
 };
 
 
+export const getSource= async (req, res) => {
+    try {
+        const data = await Data.find({}, 'source');
+        const source = data.map(entry => entry.source);
+        res.status(200).json(source);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
+export const getPestle = async (req, res) => {
+    try {
+        const data = await Data.find({}, 'pestle');
+        const pestleCount = {};
+        
+        // Count occurrences of each pestle
+        data.forEach(entry => {
+            if (entry.pestle) {
+                pestleCount[entry.pestle] = (pestleCount[entry.pestle] || 0) + 1;
+            }
+        });
+
+        // Convert pestle count object to array of objects containing pestle name and frequency
+        const pestle = Object.entries(pestleCount).map(([pestle, count]) => ({ pestle, count }));
+        
+        res.status(200).json(pestle);
+    } catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+};
+
 
 export const getIntensityAndLikelihood = async (req, res) => {
     try {
@@ -145,4 +176,7 @@ export const getTopic = async (req, res) => {
       res.status(404).json({ message: error.message });
     }
   };
+
+
+  
   
