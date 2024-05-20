@@ -113,7 +113,7 @@ const OverviewVisualization = ({ data }) => {
                 {`Duration: ${insight.start_year || insight.end_year ? `${insight.start_year}-${insight.end_year}` : 'Unknown'}`}
               </Typography>
               <Typography variant="body2">{`Likelihood: ${insight.likelihood}`}</Typography>
-              <Link href={insight.url} target="_blank" rel="noopener">
+              <Link href={insight.url} target="_blank" rel="noopener" sx={{color: theme.palette.text.primary}}>
                 Read More
               </Link>
             </Box>
